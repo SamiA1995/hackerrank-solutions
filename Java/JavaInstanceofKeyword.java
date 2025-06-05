@@ -6,7 +6,7 @@ class Rockstar{   }
 class Hacker{}
 
 
-public class InstanceOFTutorial{
+public class JavaInstanceofKeyword{
 	
    static String count(ArrayList mylist){
       int a = 0,b = 0,c = 0;
