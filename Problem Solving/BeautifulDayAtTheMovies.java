@@ -6,26 +6,20 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.regex.*;
 
-class BeautifulDaysAtTheMovies {
-
-    /*
-     * Complete the 'beautifulDays' function below.
-     *
-     * The function is expected to return an INTEGER.
-     * The function accepts following parameters:
-     *  1. INTEGER i
-     *  2. INTEGER j
-     *  3. INTEGER k
-     */
+class BeautifulDayAtTheMovies {
 
     public static int beautifulDays(int i, int j, int k) {
         int beautiful_days = 0;
         while(i <= j) {
             String reverse_int = Integer.toString(i);
-            // for(int a = 0; a <) {
-                
-            // }
-            String reverse_int_2 = "" + reverse_int.charAt(1) + reverse_int.charAt(0);
+            String reverse_int_2 = "";
+            int reverse_int_length = 1;
+            if(reverse_int.charAt(reverse_int.length()-1) == '0') {
+                reverse_int_length++;
+            }
+            for(int a = reverse_int.length()-reverse_int_length; a >= 0; a--) {
+                reverse_int_2 += reverse_int.charAt(a);
+            }
             int reverse_int_3 = Integer.parseInt(reverse_int_2);
             System.out.println(reverse_int_3);
             int reverse = i - reverse_int_3;
@@ -42,7 +36,7 @@ class BeautifulDaysAtTheMovies {
 
 }
 
-public class BeautifulDayAtTheMovies {
+public class Solution {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
