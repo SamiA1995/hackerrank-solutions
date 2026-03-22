@@ -10,14 +10,12 @@ class SaveThePrisoner {
 
     public static int saveThePrisoner(int n, int m, int s) {
         int remainder = m % n;
-        for(int i = 0; i < remainder-1; i++) {
-            if(s == n) {
-                s = 1;
-            } else {
-                s++;
-            }
+        int position = s + remainder-1; 
+        if(position <= n) {
+            return position;
+        } else {
+            return position - n;
         }
-        return s;
     }
 
 }
