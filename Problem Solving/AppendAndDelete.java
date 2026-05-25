@@ -9,12 +9,6 @@ import java.util.regex.*;
 class Result {
 
     public static String appendAndDelete(String s, String t, int k) {
-        //Check how much of the first equals the second
-        //Keep a count of this  (how much to delete)
-        
-        //Check the length of the second and add it to how much to delete
-        //If it is the same as k, return yes
-        
         int deleted_letters = 0;
         int number_of_letters_to_add = 0;
         int shortest_string_length = 0;
@@ -23,16 +17,18 @@ class Result {
         } else {
             shortest_string_length = t.length();
         }
-        for(int i = 0; i < shortest_string_length; i++) {
+        
+        int i = 0;
+        for(; i < shortest_string_length; i++) {
             if(s.charAt(i) == (t.charAt(i))) {
                 continue;
             } else {
-                deleted_letters = s.length() - i;
-                number_of_letters_to_add = t.length() - i;
                 break;
             }
         }
         
+        deleted_letters = s.length() - i;
+        number_of_letters_to_add = t.length() - i;
         if(deleted_letters + number_of_letters_to_add <= k) {
             return "Yes";
         } else {
