@@ -10,6 +10,12 @@ class Result {
 
     public static int nonDivisibleSubset(int k, List<Integer> s) {
         int number_divisible = s.size();
+        //Get the possible number of permutations using factorials
+        
+        //Get all the permutations and put the sums which are divisible by k
+        //into the potential divisors double array.
+        //!!! The size of potential_divisors needs to be more to cover the 
+        //number of permutations !!!
         while(number_divisible != 0) {
             number_divisible = 0;
             int[][] potential_divisors = new int[s.size()][2];
@@ -22,15 +28,22 @@ class Result {
                     }
                 }
             }
+            
+            //If none of the permutations sum to a values not divisible by k
+            //return the size of s (the original array with numbers removed).
             if(number_divisible == 0) {
                 return s.size();
             }
             
+            //An array to store the number of times each number in s occurs
+            //in the potential divisors double array.
             int[] occurences = new int[s.size()];
             for(int i = 0; i < occurences.length; i++) {
                 occurences[i] = 0;
             }
             
+            //Go through potential divisors, and check how many times s 
+            //appears.
             for(int i = 0; i < s.size(); i++) {
                 for(int j = 0; j < potential_divisors.length; j++) {
                     if(s.get(i) == potential_divisors[j][0]) {
@@ -42,6 +55,7 @@ class Result {
                 }
             }
             
+            //Get the most occurrences and its position and remove from s
             int most_occurences = occurences[0];
             int most_occurences_position = 0;
             for(int i = 1; i < occurences.length; i++) {
@@ -56,7 +70,7 @@ class Result {
     }
 }
 
-public class NonDivisibleSubset {
+public class Solution {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
