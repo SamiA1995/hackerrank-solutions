@@ -10,20 +10,20 @@ class Result {
 
     public static int nonDivisibleSubset(int k, List<Integer> s) {
         int number_divisible = s.size();
-        //Get the possible number of permutations using factorials
-        
+        int potential_divisors_size = s.size()*s.size();
+        int potential_divisors_index = 0;
         //Get all the permutations and put the sums which are divisible by k
         //into the potential divisors double array.
-        //!!! The size of potential_divisors needs to be more to cover the 
-        //number of permutations !!!
         while(number_divisible != 0) {
             number_divisible = 0;
-            int[][] potential_divisors = new int[s.size()][2];
-            for(int i = 0; i < s.size(); i++) {
+            int[] potential_divisors = new int[potential_divisors_size];
+            for(int i = 0; i < s.size()-1; i++) {
                 for(int j = i+1; j < s.size(); j++) {
                     if((s.get(i) + s.get(j)) % k == 0) {
-                        potential_divisors[i][0] = s.get(i);
-                        potential_divisors[i][1] = s.get(j);
+                        potential_divisors[potential_divisors_index] = s.get(i);
+                        potential_divisors_index++;
+                        potential_divisors[potential_divisors_index] = s.get(j);
+                        potential_divisors_index++;
                         number_divisible++;
                     }
                 }
@@ -46,10 +46,7 @@ class Result {
             //appears.
             for(int i = 0; i < s.size(); i++) {
                 for(int j = 0; j < potential_divisors.length; j++) {
-                    if(s.get(i) == potential_divisors[j][0]) {
-                        occurences[i]++;
-                    }
-                    if(s.get(i) == potential_divisors[j][1]) {
+                    if(s.get(i) == potential_divisors[j]) {
                         occurences[i]++;
                     }
                 }
