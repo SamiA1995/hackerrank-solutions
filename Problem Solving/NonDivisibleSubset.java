@@ -9,61 +9,29 @@ import java.util.regex.*;
 class Result {
 
     public static int nonDivisibleSubset(int k, List<Integer> s) {
-        int number_divisible = s.size();
-        int potential_divisors_size = s.size()*s.size()*s.size();
-        int potential_divisors_index = 0;
-        //Get all the permutations and put the sums which are divisible by k
-        //into the potential divisors double array.
-        while(number_divisible != 0) {
-            number_divisible = 0;
-            int[] potential_divisors = new int[potential_divisors_size];
-            for(int i = 0; i < s.size()-1; i++) {
-                for(int j = i+1; j < s.size(); j++) {
-                    if((s.get(i) + s.get(j)) % k == 0) {
-                        potential_divisors[potential_divisors_index] = s.get(i);
-                        potential_divisors_index++;
-                        potential_divisors[potential_divisors_index] = s.get(j);
-                        potential_divisors_index++;
-                        number_divisible++;
-                    }
-                }
-            }
-            
-            //If none of the permutations sum to a values not divisible by k
-            //return the size of s (the original array with numbers removed).
-            if(number_divisible == 0) {
-                return s.size();
-            }
-            
-            //An array to store the number of times each number in s occurs
-            //in the potential divisors double array.
-            int[] occurences = new int[s.size()];
-            for(int i = 0; i < occurences.length; i++) {
-                occurences[i] = 0;
-            }
-            
-            //Go through potential divisors, and check how many times s 
-            //appears.
-            for(int i = 0; i < s.size(); i++) {
-                for(int j = 0; j < potential_divisors.length; j++) {
-                    if(s.get(i) == potential_divisors[j]) {
-                        occurences[i]++;
-                    }
-                }
-            }
-            
-            //Get the most occurrences and its position and remove from s
-            int most_occurences = occurences[0];
+        boolean divisors_remaining = true;
+        while(divisors_remaining) {
+            divisors_remaining = false;
+            int most_occurences = 0;
             int most_occurences_position = 0;
-            for(int i = 1; i < occurences.length; i++) {
-                if(occurences[i] > most_occurences) {
-                    most_occurences = occurences[i];
+            for(int i = 0; i < s.size(); i++) {
+                int current_occurences = 0;
+                for(int j = 0; j < s.size(); j++) {
+                    if(i != j) {
+                        if((s.get(i) + s.get(j)) % k == 0) {
+                            current_occurences++;
+                            divisors_remaining = true;
+                        }
+                    }
+                }
+                if(current_occurences > most_occurences) {
+                    most_occurences = current_occurences;
                     most_occurences_position = i;
                 }
             }
             s.remove(most_occurences_position);
-            }
-        return s.size();
+        }
+        return s.size()+1;         
     }
 }
 
