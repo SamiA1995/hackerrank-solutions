@@ -10,7 +10,7 @@ class Result {
 
     public static int nonDivisibleSubset(int k, List<Integer> s) {
         int number_divisible = s.size();
-        int potential_divisors_size = s.size()*s.size();
+        int potential_divisors_size = s.size()*s.size()*s.size();
         int potential_divisors_index = 0;
         //Get all the permutations and put the sums which are divisible by k
         //into the potential divisors double array.
