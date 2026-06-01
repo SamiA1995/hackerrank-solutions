@@ -6,34 +6,26 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.regex.*;
 
-class BeautifulDayAtTheMovies {
+class Result {
 
     public static int beautifulDays(int i, int j, int k) {
         int beautiful_days = 0;
-        while(i <= j) {
-            String reverse_int = Integer.toString(i);
-            String reverse_int_2 = "";
-            int reverse_int_length = 1;
-            if(reverse_int.charAt(reverse_int.length()-1) == '0') {
-                reverse_int_length++;
+        
+        for(; i <= j; i++) {
+            String int_to_string = Integer.toString(i);
+            String reverse_int_string = "";
+            for(int l = int_to_string.length()-1; l >= 0; l--) {
+                reverse_int_string += int_to_string.charAt(l);
             }
-            for(int a = reverse_int.length()-reverse_int_length; a >= 0; a--) {
-                reverse_int_2 += reverse_int.charAt(a);
-            }
-            int reverse_int_3 = Integer.parseInt(reverse_int_2);
-            System.out.println(reverse_int_3);
-            int reverse = i - reverse_int_3;
-            float result = (float) reverse / k;
-            System.out.println(result);
-            if(result % 1 == 0) {
+            int reverse_int = Integer.parseInt(reverse_int_string);
+            
+            if((i - reverse_int) % k == 0) {
                 beautiful_days++;
             }
-            i++;
-            System.out.println();
         }
+        
         return beautiful_days;
     }
-
 }
 
 public class Solution {
