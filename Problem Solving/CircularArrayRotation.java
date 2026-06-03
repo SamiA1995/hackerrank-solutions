@@ -9,18 +9,24 @@ import java.util.regex.*;
 class Result {
 
     public static List<Integer> circularArrayRotation(List<Integer> a, int k, List<Integer> queries) {
-        for(int i = 0; i < k; i++) {
-            List<Integer> a_2 = new ArrayList<>();
-            a_2.add(a.get(a.size()-1));
-            for(int j = 0; j < a.size()-1; j++) {
-                a_2.add(a.get(j));
-            }
-            a = a_2;
+        int new_position = k % a.size();
+        int[] a_2 = new int[a.size()];
+        int a_index = 0;
+        
+        for(int j = new_position; j < a.size(); j++) {
+            a_2[j] = a.get(a_index);
+            a_index++;
         }
         
+        int a_2_index = 0;
+        for(; a_index < a.size(); a_index++) {
+            a_2[a_2_index] = a.get(a_index);
+            a_2_index++;
+        }
+    
         List<Integer> a_3 = new ArrayList<>();
-        for(int i = 0; i < queries.size(); i++) {
-            a_3.add(a.get(queries.get(i)));
+        for(int i = 0; i < a_2.length; i++) {
+            a_3.add(a_2[i]);
         }
         return a_3;
     }
