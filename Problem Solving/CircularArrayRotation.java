@@ -25,9 +25,10 @@ class Result {
         }
     
         List<Integer> a_3 = new ArrayList<>();
-        for(int i = 0; i < a_2.length; i++) {
-            a_3.add(a_2[i]);
+        for(int i = 0; i < queries.size(); i++) {
+            a_3.add(a_2[queries.get(i)]);
         }
+        
         return a_3;
     }
 }
