@@ -6,15 +6,12 @@ import random
 import re
 import sys
 
-# Make more efficient by simply doing an add instea of iterating
 def saveThePrisoner(n, m, s):
     remainder_sweets =  m % n
-    for i in range(remainder_sweets-1):
-        if(s != n):
-            s += 1
-        else:
-            s = 1
-    return s
+    if(s+remainder_sweets-1 <= n):
+        return s+(remainder_sweets-1)
+    else:
+        return remainder_sweets-(n-(s-1))
 
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
