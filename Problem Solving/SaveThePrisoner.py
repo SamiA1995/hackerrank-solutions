@@ -8,10 +8,16 @@ import sys
 
 def saveThePrisoner(n, m, s):
     remainder_sweets =  m % n
-    if(s+remainder_sweets-1 <= n):
-        return s+(remainder_sweets-1)
-    else:
-        return remainder_sweets-(n-(s-1))
+    if(remainder_sweets == 0):
+        remainder_sweets = n;
+    s -=1
+    for i in range(remainder_sweets):
+        if(s == n):
+            s = 1
+        else:
+            s += 1
+            
+    return s
 
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
