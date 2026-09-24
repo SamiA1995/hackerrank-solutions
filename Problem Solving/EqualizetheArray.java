@@ -13,7 +13,7 @@ import static java.util.stream.Collectors.toList;
 class Result {
 
     public static int equalizeArray(List<Integer> arr) {
-        int[] a = new int[100];
+        int[] a = new int[101];
         for(int i = 0; i < arr.size(); i++) {
             a[arr.get(i)] += 1;
         }
