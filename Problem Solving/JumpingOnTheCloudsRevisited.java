@@ -11,20 +11,17 @@ public class Solution {
     static int jumpingOnClouds(int[] c, int k) {
         int energy = 100;
         int i = 0;
-        while(i < c.length) {
+        while(i <= c.length) {
             i += k;
             if(i >= c.length) {
-                i = c.length - 1;
+                i%=c.length;
             }
-            System.out.println("i: " + i);
             if(c[i] == 1) {
-                energy -= k+1;
-                System.out.println("energy: " + energy);
+                energy -= 2+1;
             } else {
                 energy -= 1;
-                System.out.println("energy: " + energy);
             }
-            if(i == c.length - 1) {
+            if((i%=c.length) == 0) {
                 return energy;
             }
         }
