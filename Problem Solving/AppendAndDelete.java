@@ -4,36 +4,29 @@ import java.security.*;
 import java.text.*;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.function.*;
 import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
 
 class Result {
-
     public static String appendAndDelete(String s, String t, int k) {
-        int deleted_letters = 0;
-        int number_of_letters_to_add = 0;
-        int shortest_string_length = 0;
-        if(s.length() <= t.length()) {
-            shortest_string_length = s.length();
-        } else {
-            shortest_string_length = t.length();
-        }
+        String convertible = "No";
         
-        int i = 0;
-        for(; i < shortest_string_length; i++) {
-            if(s.charAt(i) == (t.charAt(i))) {
-                continue;
-            } else {
-                break;
+        int substring_length = 0;
+        for(int i = 0; i < t.length(); i++) {
+            if(s.substring(0, i+1).equals(t.substring(0, i+1))) {
+                substring_length++; 
             }
         }
-        
-        deleted_letters = s.length() - i;
-        number_of_letters_to_add = t.length() - i;
-        if(deleted_letters + number_of_letters_to_add <= k) {
-            return "Yes";
-        } else {
-            return "No";
+        int deletions = s.length() - substring_length;
+        int additions = t.length() - substring_length;
+        if(k - deletions - additions == 0) {
+            convertible = "Yes";
         }
+        
+        return convertible;
     }
 
 }
