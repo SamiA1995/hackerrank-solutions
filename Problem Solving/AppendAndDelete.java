@@ -12,52 +12,35 @@ import static java.util.stream.Collectors.toList;
 
 class Result {
     public static String appendAndDelete(String s, String t, int k) {
-        String convertible = "No";
-        
-        int substring_length = 0;
-        int shorter_string_length = 0;
+        int deleted_letters = 0;
+        int number_of_letters_to_add = 0;
+        int shortest_string_length = 0;
         if(s.length() <= t.length()) {
-            shorter_string_length = s.length();
+            shortest_string_length = s.length();
         } else {
-            shorter_string_length = t.length();
+            shortest_string_length = t.length();
         }
-        System.out.println(shorter_string_length);
-        
-        for(int i = 0; i < shorter_string_length; i++) {
-            if(s.substring(0, i+1).equals(t.substring(0, i+1))) {
-                substring_length++; 
+        int i = 0;
+        for(; i < shortest_string_length; i++) {
+            if(s.charAt(i) == (t.charAt(i))) {
+                continue;
+            } else {
+                break;
             }
         }
-        int deletions = s.length() - substring_length;
-        int additions = t.length() - substring_length;
-        if(k - deletions - additions == 0 || (k - t.length() >= s.length())) {
+
+        deleted_letters = s.length() - i;
+        number_of_letters_to_add = t.length() - i;
+        if(deleted_letters + number_of_letters_to_add <= k) {
             return "Yes";
-        }
-        
-        k -= substring_length;
-        if(k % 2 == 0) {
-            return "Yes";
-        }
-        
-        k += substring_length;
-        int difference = 0;
-        if(s.length() >= t.length()) {
-            difference = s.length() - t.length();
         } else {
-            difference = t.length() - s.length();
+            return "No";
         }
-        System.out.println(difference);
-        if(k >= difference &&
-            k % 2 == 0) {
-            return "Yes";
-        }
-        
-        return convertible;
     }
 
 }
 
-public class Solution {
+public class AppendAndDelete {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
