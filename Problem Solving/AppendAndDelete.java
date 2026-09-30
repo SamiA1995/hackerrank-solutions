@@ -15,15 +15,41 @@ class Result {
         String convertible = "No";
         
         int substring_length = 0;
-        for(int i = 0; i < t.length(); i++) {
+        int shorter_string_length = 0;
+        if(s.length() <= t.length()) {
+            shorter_string_length = s.length();
+        } else {
+            shorter_string_length = t.length();
+        }
+        System.out.println(shorter_string_length);
+        
+        for(int i = 0; i < shorter_string_length; i++) {
             if(s.substring(0, i+1).equals(t.substring(0, i+1))) {
                 substring_length++; 
             }
         }
         int deletions = s.length() - substring_length;
         int additions = t.length() - substring_length;
-        if(k - deletions - additions == 0) {
-            convertible = "Yes";
+        if(k - deletions - additions == 0 || (k - t.length() >= s.length())) {
+            return "Yes";
+        }
+        
+        k -= substring_length;
+        if(k % 2 == 0) {
+            return "Yes";
+        }
+        
+        k += substring_length;
+        int difference = 0;
+        if(s.length() >= t.length()) {
+            difference = s.length() - t.length();
+        } else {
+            difference = t.length() - s.length();
+        }
+        System.out.println(difference);
+        if(k >= difference &&
+            k % 2 == 0) {
+            return "Yes";
         }
         
         return convertible;
