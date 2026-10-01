@@ -30,8 +30,10 @@ class Result {
         }
 
         deleted_letters = s.length() - i;
-        number_of_letters_to_add = t.length() - i;
-        if(deleted_letters + number_of_letters_to_add <= k) {
+        number_of_letters_to_add = t.length() - (s.length() - deleted_letters);
+        int difference = t.length() - shortest_string_length;
+        if(deleted_letters + number_of_letters_to_add == k || 
+        deleted_letters + number_of_letters_to_add < k && difference % 2 == 0) {
             return "Yes";
         } else {
             return "No";
